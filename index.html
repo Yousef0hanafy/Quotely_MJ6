@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quotely</title>
+    <link rel="shortcut icon" href="Images/quote.png" type="image/x-icon">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <link rel="stylesheet" href="Css/style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="quote-box">
+            <button id="favorite-quote" class="secondary favIcon"><img src="images/heart.png" alt="Favorite icon"></button>
+            <h1>Quote of  the Day</h1>
+            <blockquote id="quote" class="fade-in"></blockquote>
+            <span id="author" class="fade-in"></span>
+            <div>
+                <button id="new-quote">New Quote</button>
+                <button id="fb-share"><img src="Images/facebook.png" alt="facebook icon"> Share</button>
+                <button id="copy-quote" class="secondary"><img src="images/copy.png" alt="Copy icon">Copy</button>
+                <button id="toggle-favorites" class="secondary">Show Favorites</button>
+            </div>
+        </div>
+        <section id="favorites-section" class="favorites-section">
+            <h2>My Favorite Quotes</h2>
+            <ul id="favorites-list"></ul>
+        </section>
+    </div>
+    <script src="JS/script.js"></script>
+</body>
+</html>

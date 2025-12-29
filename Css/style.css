@@ -1,0 +1,248 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair:ital,opsz,wght@0,5..1200,300..900;1,5..1200,300..900&display=swap');
+:root {
+    /* New Color Palette: Sophisticated Navy and Gold */
+    --main-color: #d4af37;      /* Gold */
+    --bg-color: #1a1a2e;        /* Midnight Navy */
+    --box-bg: #ffffff;
+    --text-primary: #16213e;
+    --text-secondary: #555;
+    --transition: all 0.3s ease;
+}
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+body {
+    background-image: url(../Images/quote_BG.jpg);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    font-family: "Playfair", serif;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+body::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.4); /* dark overlay */
+    z-index: 0;
+}
+/* SweetAlert uses fixed position & z-index, so we must ensure overlay doesn’t cover it.*/
+.swal2-container {
+    z-index: 9999 !important;
+}
+.container{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.quote-box {
+    background: var(--box-bg);
+    width: 90%;
+    max-width: 600px;
+    padding: 50px;
+    border-radius: 20px;
+    text-align: center;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+    position: relative;
+}
+.quote-box h1 {
+    font-size: 32px;
+    margin-bottom: 40px;
+    position: relative;
+    color: var(--text-primary);
+    text-transform: capitalize;
+}
+.quote-box h1::after,
+.favorites-section h2::after{
+    content: "";
+    width: 50px;
+    height: 3px;
+    border-radius: 3px;
+    background: var(--main-color);
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+.quote-box blockquote {
+    font-size: 24px;
+    line-height: 1.5;
+    min-height: 100px;
+    color: var(--text-primary);
+}
+
+.quote-box blockquote::before,
+.quote-box blockquote::after{
+    content: '“'; 
+    color: var(--main-color);
+    font-size: 50px;
+    line-height: 0; 
+    vertical-align: -15px; 
+    margin-right: 5px; }
+.quote-box blockquote::after{ 
+    content: '”'; 
+    margin-left: 5px; 
+}
+.quote-box span {
+    display: block;
+    margin-top: 20px;
+    font-style: italic;
+    color: var(--text-secondary);
+    text-align: right;
+    font-weight: 600;
+}
+.quote-box div {
+    width: 100%;
+    margin-top: 40px;
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+}
+.quote-box button {
+    background: var(--main-color);
+    color: #fff;
+    border-radius: 30px;
+    border: 2px solid var(--main-color);
+    padding: 12px 25px;
+    font-family: inherit;
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition);
+    display: flex;
+    align-items: center;
+}
+.quote-box button img{
+    width: 20px;
+    margin-right: 8px;
+}
+.quote-box button.favIcon{
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    padding: 10px;
+    margin: 0;
+}
+.quote-box button.favIcon img{
+    margin: 0;
+}
+@media (max-width: 767px) {
+    .quote-box button{
+        padding: 12px 15px;
+        flex-direction: column;
+    }
+    .quote-box button img{
+        margin-bottom: 5px;
+    }
+}
+.quote-box button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(212, 175, 55, 0.3);
+    opacity: 0.9;
+}
+.quote-box button:nth-child(2),
+.quote-box button:nth-child(4){
+    background: transparent;
+    color: var(--text-primary);
+    border-color: #ddd;
+}
+.quote-box button:nth-child(2):hover,
+.quote-box button:nth-child(4):hover {
+    border-color: var(--main-color);
+    color: var(--main-color);
+}
+/* Fade-in animation */
+.fade-in {
+    opacity: 0;
+    transform: translateY(10px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+}
+.fade-in.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+/* CSS For Favorites Section */
+.favorites-section {
+    display: none;
+    margin-top: 10px;
+    max-width: 550px;
+    width: 90%;
+    background-color: var(--box-bg);
+    border-radius: var(--radius-lg);
+    padding: 2rem;
+    box-shadow: var(--shadow-lg);
+    border-radius: 10px;
+    z-index: 9;   
+}
+@media (min-width: 767px) {
+    .container{
+        display: flex;
+        align-items: center;
+        flex-direction: row;
+    }
+    .favorites-section{
+        margin-left: 10px;
+    }
+}
+.favorites-section h2 {
+    text-align: center;
+    font-size: 1.8rem;
+    margin-bottom: 1.5rem;
+    color: var(--text-primary);
+    position: relative;
+}
+#favorites-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+#favorites-list li {
+    padding: 1rem;
+    background-color: #f9f9f9;
+    border-radius: var(--radius-pill);
+    font-style: italic;
+    color: var(--text-secondary);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    transition: transform 0.2s ease;
+}
+#favorites-list li:hover {
+    transform: translateY(-2px);
+}
+/* /////////// */
+.favorite-item {
+    padding: 10px 15px;
+    border-radius: 8px;
+    background-color: #f5f5f5;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+#favorites-list li {
+    padding: 10px 15px;
+    border-radius: 8px;
+    background-color: #f5f5f5;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+#favorites-list li .remove-fav-btn {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+}
+#favorites-list li .remove-fav-btn img {
+    display: block;
+    width: 20px;
+    height: 20px;
+    object-fit: contain;
+}
